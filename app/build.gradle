@@ -10,6 +10,8 @@ android {
     targetSdkVersion 23
     versionCode 1
     versionName "1.0"
+    testApplicationId "com.android.example.test"
+    testInstrumentationRunner "com.android.example.test.CucumberInstrumentationRunner"
   }
   buildTypes {
     release {
@@ -17,11 +19,26 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  sourceSets {
+    androidTest {
+      assets.srcDirs = ['src/androidTest/assets']
+    }
+  }
 }
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.2.0'
-  compile 'com.android.support:design:23.2.0'
+  compile 'com.android.support:appcompat-v7:23.3.0'
+  compile 'com.android.support:design:23.3.0'
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+  androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+
+  //https://github.com/cucumber/cucumber-jvm/issues/893
+  androidTestCompile('info.cukes:cucumber-android:1.2.4') {
+    exclude module: 'cucumber-jvm-deps'
+    exclude module: 'guava'
+  }
+  androidTestCompile 'info.cukes:cucumber-jvm-deps:1.0.3'
 }
