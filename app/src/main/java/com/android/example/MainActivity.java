@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             .show();
       }
     });
+    throw new RuntimeException("This exception will stop the instrumentation");
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
